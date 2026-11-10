@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>1stLocal: Be the local business your customers' AI picks first</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap"
+    />
+    <link rel="stylesheet" href="hark.css" />
+    <link rel="stylesheet" href="hark-hero.css" />
+    <style>
+      .x-brand { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+      .x-brand__logo { display: inline-flex; align-items: center; gap: 10px; min-height: var(--tap); text-decoration: none; color: var(--text-secondary); font: var(--type-label); }
+      .x-brand__logo img { height: 36px; width: auto; padding: 4px 10px; border-radius: var(--r-s); background: #fff; }
+      .x-ctas { display: flex; flex-wrap: wrap; gap: 10px; }
+      .x-cta {
+        display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+        min-height: 52px; padding: 0 24px; border-radius: var(--r-pill);
+        background: var(--fill-primary); color: var(--text-primary-on);
+        border: 1px solid transparent; font: var(--type-body-strong); text-decoration: none;
+        cursor: pointer; transition: box-shadow var(--dur-quick) ease, transform var(--dur-quick) ease;
+      }
+      .x-cta:hover { box-shadow: inset 0 0 0 100px var(--hover-wash-primary-on); }
+      .x-cta:active { transform: scale(0.97); }
+      .x-cta--alt { background: var(--fill-primary-on); color: var(--text-primary); border-color: var(--stroke-primary); }
+      .x-cta--alt:hover { box-shadow: inset 0 0 0 100px var(--hover-wash); }
+      .hero .x-cta--alt { background: var(--hero-glass); color: var(--hero-text); border-color: var(--hero-glass-stroke); -webkit-backdrop-filter: var(--hark-blur); backdrop-filter: var(--hark-blur); }
+      @media (max-width: 599px) { .x-ctas > .x-cta { flex: 1 1 100%; } }
+      .x-illus { margin: 0; }
+      .x-illus img { width: 100%; height: auto; display: block; border-radius: var(--r-m); border: 1px solid var(--stroke-secondary); }
+      .x-illus figcaption { font-size: var(--size-caption); color: var(--text-secondary); padding: 10px 4px 0; }
+      .x-lede { font: var(--type-heading); max-width: 40ch; text-wrap: balance; }
+      .x-faq { max-width: 72ch; }
+      .x-faq details { border-bottom: 1px solid var(--stroke-secondary); }
+      .x-faq summary {
+        display: flex; align-items: center; justify-content: space-between; gap: 16px;
+        min-height: 56px; padding: 12px 0; font: var(--type-body-strong); cursor: pointer; list-style: none;
+      }
+      .x-faq summary::-webkit-details-marker { display: none; }
+      .x-faq summary::after { content: "+"; flex: none; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--fill-tertiary); font: var(--type-body); }
+      .x-faq details[open] summary::after { content: "\2212"; }
+      .x-faq details p { padding: 0 0 16px; color: var(--text-secondary); }
+      .x-form { display: grid; gap: 16px; max-width: 560px; padding: 22px 24px; border-radius: var(--r-m); background: var(--fill-tertiary); }
+      .x-form label { display: grid; gap: 6px; font: var(--type-label); }
+      .x-form input, .x-form textarea {
+        width: 100%; min-height: 52px; padding: 12px 14px; border-radius: var(--r-s);
+        border: 1px solid var(--stroke-primary); background: var(--fill-primary-on); color: var(--text-primary);
+        font: var(--type-body); font-size: max(16px, var(--size-body));
+      }
+      .x-form textarea { min-height: 96px; resize: vertical; }
+      .x-form .x-cta { width: 100%; }
+      .x-form__thanks { font: var(--type-body-strong); }
+      @media (max-width: 599px) { .x-form { padding: 18px; } }
+      /* 1stLocal Bluebonnet palette (Zane's pick, Mark yes 2026-11-09) */
+      :root { --bb-blue: #3B5BE8; /* deeper than card #4A6CF7 for WCAG AA contrast */ --bb-light: #93AFFD; --bb-navy: #1F2B5B; }
+      .x-cta { background: var(--bb-blue); color: #fff; }
+      .x-cta:hover { box-shadow: inset 0 0 0 100px rgba(31,43,91,.22); }
+      .x-cta--alt { background: transparent; color: var(--bb-blue); border-color: var(--bb-blue); }
+      .head__eyebrow { color: var(--bb-blue); }
+      .prose a, a.link { color: var(--bb-blue); }
+      .x-faq summary::after { background: var(--bb-blue); color: #fff; }
+      .x-form input:focus { outline: 2px solid var(--bb-blue); outline-offset: 1px; }
+    </style>
+  </head>
+  <body>
+    <div class="page" id="top">
+      <div class="x-brand">
+        <a class="x-brand__logo" href="#top"><img src="1stlocal_logo_bluebonnet.png" alt="1stLocal" /><span>AI visibility for local businesses.</span></a>
+      </div>
+      <header class="nav glass" data-auto></header>
+      <main class="main">
+        <section class="hero">
+          <img class="hero__img" src="firstlocal_hero_bluebonnets.jpg" alt="Bluebonnets on a Hill Country ridge above Lake Travis" />
+          <div class="hero__copy">
+            <p class="hero__eyebrow">Austin · Lake Travis · anywhere local</p>
+            <h1>Be the local business your customers' AI picks first.</h1>
+            <p class="hero__sub">Our free 45-point check shows how ChatGPT, Google's Gemini and Perplexity describe your business. Then we fix what's missing.</p>
+            <div class="x-ctas">
+              <a class="x-cta" href="#check">Get your free AI check</a>
+              <a class="x-cta x-cta--alt" href="tel:+15125167733">Call or text Zane</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="shift" data-nav="Why">
+          <div class="head">
+            <p class="head__eyebrow">The shift</p>
+            <h2>Customers stopped scrolling. They ask AI.</h2>
+          </div>
+          <div class="pair">
+            <div class="prose">
+              <p>Customers used to search and scroll. Now they ask: <strong>"Best auto detailing near me?"</strong></p>
+              <p>AI answers with two or three names. If you're not one of them, you never get the call.</p>
+            </div>
+            <figure class="x-illus">
+              <img src="card_v2_front_bluebonnet.png" alt="The 1stLocal card: someone asks AI 'Best auto detailing near me?' and the top pick is '1. Your business'" />
+              <figcaption>The question your customers ask, and the answer you want.</figcaption>
+            </figure>
+          </div>
+        </section>
+
+        <section class="section" id="found" data-nav="Results">
+          <div class="head">
+            <p class="head__eyebrow">What we found</p>
+            <h2>Being known isn't the same as being recommended.</h2>
+            <p class="head__sub">From our own tests. Businesses unnamed.</p>
+          </div>
+          <div class="cards">
+            <div>
+              <h3>Austin remodeler</h3>
+              <p class="quote">0 of 45</p>
+              <p>His customers rave about him, yet he wasn't named in a single AI answer.</p>
+            </div>
+            <div>
+              <h3>Bee Cave AC company</h3>
+              <p class="quote">5 of 15 vs 0 of 15</p>
+              <p>AI recommends it in Bee Cave, and never in nearby Lakeway or Austin.</p>
+            </div>
+            <div>
+              <h3>Our own nonprofit</h3>
+              <p class="quote">1 of 15</p>
+              <p>AI knew it by name every time, but recommended it in only 1 of 15 "recommend me" answers.</p>
+            </div>
+          </div>
+          <div class="x-ctas"><a class="x-cta" href="#check">Get your free AI check</a></div>
+        </section>
+
+        <section class="section" id="how" data-nav="How">
+          <div class="head">
+            <p class="head__eyebrow">How it works</p>
+            <h2>Check, fix, retest.</h2>
+          </div>
+          <div class="steps">
+            <article class="step">
+              <div class="step__intro"><p class="step__num">01</p><p class="step__eyebrow">Free</p></div>
+              <div>
+                <h3>Check</h3>
+                <ul class="step__pills"><li><b>15</b> questions</li><li><b>3</b> AIs</li><li><b>45</b> answers</li></ul>
+                <p>We ask ChatGPT, Google's Gemini and Perplexity 15 questions your customers really ask, across your towns. You see who AI names and how often.</p>
+              </div>
+            </article>
+            <article class="step">
+              <div class="step__intro"><p class="step__num">02</p><p class="step__eyebrow">One fixed price</p></div>
+              <div>
+                <h3>Fix</h3>
+                <p>We fix what AI reads: your website's descriptions and structured data, FAQs, Google Business Profile, directory listings, and the outside sites AI trusts.</p>
+              </div>
+            </article>
+            <article class="step">
+              <div class="step__intro"><p class="step__num">03</p><p class="step__eyebrow">A few weeks later</p></div>
+              <div>
+                <h3>Retest</h3>
+                <p>We ask the same questions again and show you the before and after.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section" id="fix" data-nav="Fixes">
+          <div class="head">
+            <p class="head__eyebrow">What we fix</p>
+            <h2>Everything AI reads about you.</h2>
+          </div>
+          <div class="cards">
+            <div>
+              <h3>On your website</h3>
+              <ul>
+                <li>Website copy AI can quote</li>
+                <li>Structured data that tells AI who you are and where you work</li>
+                <li>FAQs that answer real customer questions</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Around the web</h3>
+              <ul>
+                <li>Google Business Profile tune-up</li>
+                <li>Matching name, address and phone across directories</li>
+                <li>Reviews and outside mentions AI trusts</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="time" data-nav="Your time">
+          <div class="head">
+            <p class="head__eyebrow">Your time</p>
+            <h2>The real cost isn't our fee. It's your time.</h2>
+          </div>
+          <div class="pair">
+            <div class="prose">
+              <p>We've run businesses ourselves, so we know. We keep your part small, and we do the rest.</p>
+            </div>
+            <div class="breakdown">
+              <dl>
+                <div class="row"><dt>Kickoff call</dt><dd>10 min</dd></div>
+                <div class="row"><dt>Give us access <small>A couple of taps</small></dt><dd>Minutes</dd></div>
+                <div class="row"><dt>Approve new page text <small>A quick yes before anything goes live</small></dt><dd>Minutes</dd></div>
+                <div class="row row--total"><dt>Total, over 30 days</dt><dd>20–30 min</dd></div>
+              </dl>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="pricing" data-nav="Pricing">
+          <div class="head">
+            <p class="head__eyebrow">Pricing</p>
+            <h2>Start with a free check.</h2>
+          </div>
+          <div class="prose">
+            <p>The check is free. If you want the fixes, we quote one fixed price after your check, with no contract.</p>
+          </div>
+          <p class="fineprint">AI answers vary day to day. We show what AI said; we don't promise what it will say.</p>
+          <div class="links">
+            <a class="x-cta" href="#check">Get your free AI check</a>
+          </div>
+        </section>
+
+        <section class="section" id="giving" data-nav="Giving">
+          <div class="head">
+            <p class="head__eyebrow">Family-run</p>
+            <h2>Every dollar of profit gives back.</h2>
+          </div>
+          <div class="prose">
+            <p>100% of our profits go to Oceanbags Foundation, our family's nonprofit, started in Austin in 2023. It sends rugged backpacks made from ocean-bound plastic to kids in crisis around the world, and puts its Kids and Planet books in Title I classrooms. <a class="link" href="https://www.kidsandplanet.com/" target="_blank" rel="noopener">kidsandplanet.com</a></p>
+          </div>
+        </section>
+
+        <section class="section" id="team" data-nav="About">
+          <div class="head">
+            <p class="head__eyebrow">Who we are</p>
+            <h2>Who you can call.</h2>
+          </div>
+          <div class="prose">
+            <h3>Zane Haas</h3>
+            <p>After graduating from St. Edward's University here in Austin, I co-founded the nonprofit Oceanbags Foundation with my parents, and I run it day to day. When you work with 1stLocal, you also help Oceanbags support kids in crisis around the world. All profits go there. — Zane Haas</p>
+            <p><a class="link" href="tel:+15125167733">(512) 516-7733</a> · <a class="link" href="mailto:zane@firstlocal.io">zane@firstlocal.io</a></p>
+          </div>
+        </section>
+
+        <section class="section" id="faq" data-nav="FAQ">
+          <div class="head">
+            <p class="head__eyebrow">FAQ</p>
+            <h2>Straight answers.</h2>
+          </div>
+          <div class="x-faq">
+            <details>
+              <summary>What's AI visibility?</summary>
+              <p>How often AI assistants name your business when someone asks for a recommendation in your field and town.</p>
+            </details>
+            <details>
+              <summary>Isn't this just SEO?</summary>
+              <p>It overlaps, but AI answers lean on structured data, reviews, listings and outside sites differently than a Google results page. We test the AI answers directly.</p>
+            </details>
+            <details>
+              <summary>What's in the free check?</summary>
+              <p>15 customer-style questions asked of three AIs across your towns (45 answers), who AI names instead of you, and how many fixable gaps we found.</p>
+            </details>
+            <details>
+              <summary>Do you guarantee I'll be named first?</summary>
+              <p>No one honest can. We fix what AI reads and retest the same questions so you can see the change.</p>
+            </details>
+            <details>
+              <summary>Do you only work in Austin?</summary>
+              <p>We started here, but the work is done online, for local businesses anywhere.</p>
+            </details>
+          </div>
+        </section>
+
+        <section class="section" id="check" data-nav="Free check">
+          <div class="head">
+            <p class="head__eyebrow">Free, no obligation</p>
+            <h2>Get your free AI check</h2>
+            <p class="head__sub">See who AI names in your towns, and why.</p>
+          </div>
+          <form class="x-form" id="check-form" action="https://formspree.io/f/FORM_ID" method="POST">
+            <label>Your name<input name="name" autocomplete="name" required /></label>
+            <label>Company<input name="company" autocomplete="organization" required /></label>
+            <label>Email<input name="email" type="email" autocomplete="email" required /></label>
+            <input type="hidden" name="_subject" value="1stLocal free check request" />
+            <input type="hidden" name="source" value="landing" />
+            <button class="x-cta" type="submit">Send my free check</button>
+            <p class="x-form__thanks" id="check-thanks" role="status" aria-live="polite" hidden>Thanks! Zane will be in touch within one business day.</p>
+          </form>
+          <p class="fineprint">Prefer to talk? Call or text Zane at <a class="link" href="tel:+15125167733">(512) 516-7733</a> (<a class="link" href="sms:+15125167733">text</a>) · <a class="link" href="mailto:zane@firstlocal.io">zane@firstlocal.io</a></p>
+        </section>
+      </main>
+      <footer class="foot">
+        <p>1stLocal · Austin, Texas · firstlocal.io · © 2026 · 100% of profits go to Oceanbags Foundation.</p>
+        <nav aria-label="Back to sections" data-auto></nav>
+      </footer>
+    </div>
+    <script src="hark.js"></script>
+    <script>
+      document.getElementById("check-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        var f = this, btn = f.querySelector("button[type=submit]");
+        btn.disabled = true; btn.textContent = "Sending…";
+        fetch(f.action, { method: "POST", body: new FormData(f), headers: { Accept: "application/json" } })
+          .then(function (r) { if (!r.ok) throw 0; btn.textContent = "Sent"; document.getElementById("check-thanks").hidden = false; f.reset(); })
+          .catch(function () { btn.disabled = false; btn.textContent = "Try again"; });
+      });
+    </script>
+  </body>
+</html>
