@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Texas Hand Wash Live AI Score</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap"
+    />
+    <link rel="stylesheet" href="hark.css" />
+    <link rel="stylesheet" href="hark-hero.css" />
+    <style>
+      :root, :root[data-theme] {
+        color-scheme: light;
+        --x-blue: #3b5be8;
+        --x-blue-wash: #eef1fd;
+        --x-navy: #1f2b5b;
+        --x-amber: #f2a900;
+        --x-gray: #a1a1a6;
+      }
+      body { background: #fff; }
+      .x-navy, .head h2, .x-top h1 { color: var(--x-navy); }
+      :focus-visible { outline-color: var(--x-blue); }
+
+      /* Header */
+      .x-top { display: grid; gap: 16px; padding-block: 12px clamp(24px, 4vw, 40px); }
+      .x-logo { height: 40px; width: auto; }
+      .x-top h1 { font: var(--type-display); max-width: 18ch; margin-top: clamp(12px, 3vw, 28px); }
+      .x-top .x-sub { font: var(--type-lede); font-weight: var(--weight-regular); color: var(--text-secondary); max-width: 60ch; }
+      .x-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-top: 8px; }
+      .x-btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+        min-height: 52px; padding: 0 28px; border: 0; border-radius: var(--r-pill);
+        background: var(--x-blue); color: #fff; font: var(--type-body-strong); font-size: var(--size-prose);
+        text-decoration: none; cursor: pointer;
+        transition: box-shadow var(--dur-quick) ease, transform var(--dur-quick) ease;
+      }
+      .x-btn:hover { box-shadow: inset 0 0 0 100px rgb(255 255 255 / 0.12); }
+      .x-btn:active { transform: scale(0.97); }
+      .x-btn[disabled] { opacity: 0.6; cursor: default; }
+      .x-skip { color: var(--x-blue); font: var(--type-label); text-decoration: underline; text-underline-offset: 3px; min-height: var(--tap); display: inline-flex; align-items: center; }
+      .x-ctrl {
+        display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+        min-height: var(--tap); padding: 0 16px; border-radius: var(--r-pill);
+        border: 1px solid var(--stroke-primary); background: #fff; color: var(--x-navy);
+        font: var(--type-label); cursor: pointer;
+      }
+      .x-ctrl:hover { box-shadow: inset 0 0 0 100px var(--hover-wash); }
+      .x-ctrl--blue { background: var(--x-blue); border-color: var(--x-blue); color: #fff; }
+
+      /* Player */
+      .x-stage { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+      @media (max-width: 859px) { .x-stage { grid-template-columns: minmax(0, 1fr); } }
+      .x-panel { border: 1px solid var(--stroke-primary); border-radius: var(--r-l); background: #fff; padding: clamp(16px, 2.4vw, 24px); }
+      .x-player { display: grid; gap: 18px; min-height: 460px; align-content: start; }
+      .x-bar-row { display: grid; gap: 8px; }
+      .x-progress { height: 6px; border-radius: var(--r-pill); background: var(--fill-tertiary); overflow: hidden; }
+      .x-progress i { display: block; height: 100%; width: 0; background: var(--x-blue); border-radius: inherit; transition: width 400ms var(--ease-out); }
+      .x-progress-meta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; }
+      .x-count { font: var(--type-label); color: var(--x-navy); }
+      .x-controls { display: flex; gap: 8px; }
+
+      .x-q { display: grid; justify-items: end; gap: 6px; }
+      .x-town { font: var(--type-tag); color: var(--text-secondary); }
+      .x-bubble {
+        max-width: 92%; padding: 12px 16px; border-radius: 20px 20px 6px 20px;
+        background: var(--x-blue); color: #fff; font: var(--type-body); font-size: var(--size-prose);
+        min-height: 47px;
+      }
+      .x-caret { display: inline-block; width: 2px; height: 1em; margin-left: 2px; vertical-align: -2px; background: currentColor; animation: x-blink 0.8s steps(1) infinite; }
+      @keyframes x-blink { 50% { opacity: 0; } }
+
+      .x-a { display: grid; gap: 12px; justify-items: start; }
+      .x-engine {
+        display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: var(--r-pill);
+        background: var(--x-navy); color: #fff; font: var(--type-tag);
+      }
+      .x-dots { display: inline-flex; gap: 4px; }
+      .x-dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--x-navy); animation: x-bounce 0.9s infinite ease-in-out; }
+      .x-dots i:nth-child(2) { animation-delay: 0.15s; }
+      .x-dots i:nth-child(3) { animation-delay: 0.3s; }
+      @keyframes x-bounce { 0%, 80%, 100% { transform: translateY(0); opacity: 0.35; } 40% { transform: translateY(-4px); opacity: 1; } }
+      .x-thinking { display: flex; align-items: center; gap: 10px; font: var(--type-small); color: var(--text-secondary); }
+
+      .x-picks-label { font: var(--type-label); color: var(--x-navy); }
+      .x-picks { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+      .x-picks li {
+        display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px; border-radius: var(--r-pill);
+        background: var(--fill-tertiary); color: var(--text-primary); font: var(--type-label);
+        animation: x-pop 360ms var(--ease-out) both;
+      }
+      .x-picks li b { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #fff; color: var(--x-navy); font: var(--type-tag); }
+      .x-picks li.is-you { background: var(--x-blue); color: #fff; }
+      .x-picks li.is-you b { color: var(--x-blue); }
+      @keyframes x-pop { from { opacity: 0; transform: translateY(6px) scale(0.96); } to { opacity: 1; transform: none; } }
+
+      .x-status { display: inline-flex; align-items: center; gap: 8px; font: var(--type-label); color: var(--text-primary); }
+      .x-status::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--x-gray); }
+      .x-status[data-s="recommended"]::before { background: var(--fill-system-green); }
+      .x-status[data-s="mentioned"]::before { background: var(--x-amber); }
+      .x-status span { color: var(--text-secondary); font-weight: var(--weight-regular); }
+
+      .x-read summary { cursor: pointer; color: var(--x-blue); font: var(--type-label); min-height: var(--tap); display: flex; align-items: center; }
+      .x-read p { font: var(--type-small); color: var(--text-secondary); padding: 12px 14px; border-radius: var(--r-s); background: var(--fill-tertiary); max-width: 68ch; }
+      .x-idle { display: grid; gap: 14px; justify-items: start; padding-block: 24px; }
+      .x-idle p { color: var(--text-secondary); }
+
+      /* Scoreboard */
+      .x-board { position: sticky; top: 16px; display: grid; gap: 14px; }
+      @media (max-width: 859px) { .x-board { position: static; } }
+      .x-board h3 { font: var(--type-heading); color: var(--x-navy); }
+      .x-board .fineprint { font-size: var(--size-caption); }
+      .x-race { position: relative; }
+      .x-row {
+        position: absolute; left: 0; right: 0; top: 0; height: 48px;
+        display: grid; grid-template-rows: auto 12px; gap: 4px; align-content: center;
+        transition: transform 500ms var(--ease-out), opacity 300ms ease;
+      }
+      .x-row-name { display: flex; justify-content: space-between; gap: 8px; font: var(--type-small); color: var(--text-primary); }
+      .x-row-name span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .x-row-name b { font-variant-numeric: tabular-nums; color: var(--x-navy); }
+      .x-track { border-radius: var(--r-pill); background: var(--fill-tertiary); overflow: hidden; }
+      .x-fill { height: 100%; width: 0; border-radius: inherit; background: var(--x-navy); opacity: 0.45; transition: width 600ms var(--ease-out); }
+      .x-row.is-you .x-row-name { font-weight: var(--weight-bold); color: var(--x-blue); }
+      .x-row.is-you .x-row-name b { color: var(--x-blue); }
+      .x-row.is-you .x-fill { background: var(--x-blue); opacity: 1; }
+
+      /* Results */
+      .x-results h2 { font: var(--type-title); color: var(--x-navy); max-width: 30ch; }
+      .x-results .head h2 b { color: var(--x-blue); font-weight: var(--weight-bold); }
+      .x-final .row.is-you dt, .x-final .row.is-you dd { color: var(--x-blue); font-weight: var(--weight-bold); }
+      .x-results[hidden] { display: none; }
+
+      /* Form */
+      .x-cta { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 24px 48px; align-items: start; }
+      @media (max-width: 859px) { .x-cta { grid-template-columns: minmax(0, 1fr); } }
+      .x-cta h2 { font: var(--type-title); color: var(--x-navy); }
+      .x-form { display: grid; gap: 14px; }
+      .x-form label { display: grid; gap: 6px; font: var(--type-label); color: var(--x-navy); }
+      .x-form label span { color: var(--text-secondary); font-weight: var(--weight-regular); }
+      .x-form input {
+        min-height: var(--tap); padding: 10px 14px; border-radius: var(--r-s);
+        border: 1px solid var(--stroke-primary); background: #fff; color: var(--text-primary);
+        font: var(--type-body); font-size: 16px;
+      }
+      .x-form input:focus-visible { outline: 2px solid var(--x-blue); outline-offset: 1px; border-color: var(--x-blue); }
+      .x-form .x-btn { justify-self: start; }
+      .x-thanks { padding: 20px; border-radius: var(--r-m); background: var(--x-blue-wash); color: var(--x-navy); font: var(--type-body-strong); font-size: var(--size-prose); }
+      .x-error { color: var(--fill-system-red); font: var(--type-small); }
+      .x-contact { font: var(--type-small); color: var(--text-secondary); }
+      .x-contact a { color: var(--x-blue); }
+
+      .foot a { color: var(--x-blue); }
+      .foot p { max-width: 70ch; }
+      @media (max-width: 599px) {
+        .x-contact a, .foot a { display: inline-flex; align-items: center; min-width: var(--tap); min-height: var(--tap); vertical-align: middle; }
+        .x-contact { line-height: var(--tap); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .x-progress i, .x-row, .x-fill, .x-btn { transition: none; }
+        .x-picks li, .x-caret, .x-dots i { animation: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page" id="top">
+      <main class="main">
+        <header class="x-top">
+          <img class="x-logo" src="1stlocal_logo_horizontal_bb.svg" alt="1stLocal" width="127" height="40" />
+          <h1>Watch AI pick a car detailer in Lakeway</h1>
+          <p class="x-sub">We asked ChatGPT, Gemini and Perplexity 5 questions a Lakeway-area driver might ask. Here are all 15 answers, replayed one by one. Recorded November 18, 2026.</p>
+          <div class="x-actions">
+            <button class="x-btn" type="button" id="start">Start the replay</button>
+            <a class="x-skip" href="#results" id="skip">Skip to results</a>
+          </div>
+        </header>
+
+        <section class="section" id="replay" aria-label="Replay">
+          <div class="x-stage">
+            <div class="x-panel x-player" id="player">
+              <div class="x-bar-row">
+                <div class="x-progress" aria-hidden="true"><i id="progress"></i></div>
+                <div class="x-progress-meta">
+                  <p class="x-count" id="count" aria-live="polite">15 answers ready</p>
+                  <div class="x-controls">
+                    <button class="x-ctrl" type="button" id="toggle">Play</button>
+                    <button class="x-ctrl" type="button" id="next">Next</button>
+                  </div>
+                </div>
+              </div>
+              <div id="screen">
+                <div class="x-idle">
+                  <p>Each answer plays for a few seconds: the question, the AI that answered, and who it recommended.</p>
+                  <button class="x-btn" type="button" id="start2">Start the replay</button>
+                </div>
+              </div>
+            </div>
+
+            <aside class="x-panel x-board" aria-label="Live scoreboard">
+              <h3>Live scoreboard</h3>
+              <p class="fineprint" id="board-note">Answers that recommended each business, so far.</p>
+              <div class="x-race" id="race"></div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="section x-results" id="results" hidden>
+          <div class="head">
+            <p class="head__eyebrow">Results · all 15 answers</p>
+            <h2 id="headline"></h2>
+          </div>
+          <div class="pair">
+            <div class="breakdown x-final">
+              <dl id="final"></dl>
+            </div>
+            <div class="prose">
+              <p>All three of your recommendations came from one question: “What are the top-rated family-owned or local car detailers serving Lakeway?” Every AI picked you first there. When a driver simply asked for the best detailer, or who to call this week, AI sent them to mobile detailers instead. That usually means AI can’t find the proof it looks for on those questions, and that’s fixable.</p>
+              <p class="fineprint">One pass of 5 questions through each AI’s API on November 18, 2026: a snapshot, not a rate. Answers can differ in the consumer apps.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" id="book">
+          <div class="x-cta">
+            <div class="head" style="grid-template-columns: 1fr">
+              <p class="head__eyebrow">Next step</p>
+              <h2>Book 15 minutes with Zane</h2>
+              <p class="head__sub" style="justify-self: start; text-align: left">We’ll walk through these answers and what it takes to win the questions you’re missing.</p>
+            </div>
+            <div id="form-wrap">
+              <form class="x-form" id="book-form" action="https://formspree.io/f/xrpqzzon" method="POST">
+                <input type="hidden" name="business" value="Texas Hand Wash" />
+                <input type="hidden" name="code" value="thw" />
+                <input type="hidden" name="source" value="live-score-preview" />
+                <input type="hidden" name="_subject" value="Book a call: Texas Hand Wash live score (thw)" />
+                <label>Name<input type="text" name="name" autocomplete="name" required /></label>
+                <label>Email<input type="email" name="email" autocomplete="email" required /></label>
+                <label>Phone <span>(optional)</span><input type="tel" name="phone" autocomplete="tel" /></label>
+                <label>Best time to reach you <span>(optional)</span><input type="text" name="best_time" /></label>
+                <button class="x-btn" type="submit" id="submit">Book my 15 minutes</button>
+                <p class="x-error" id="form-error" role="alert" hidden></p>
+                <p class="fineprint">We use this address only to reply to you.</p>
+              </form>
+              <p class="x-thanks" id="thanks" role="status" hidden>Thanks! Zane will reach out within one business day.</p>
+              <p class="x-contact" style="margin-top: 16px">Zane Haas · 1stLocal · <a href="mailto:zane@firstlocal.io">zane@firstlocal.io</a> · <a href="tel:+15125167733">(512) 516-7733</a></p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="foot">
+        <p>100% of 1stLocal’s profits go to Kids and Planet Foundation (<a href="https://kidsandplanet.com" target="_blank" rel="noopener">kidsandplanet.com</a>), our family’s nonprofit. It sends rugged backpacks made from Ocean Bound Plastic to kids in crisis around the world, and puts inspiring books in Title I classrooms.</p>
+        <a href="https://firstlocal.io" target="_blank" rel="noopener">firstlocal.io</a>
+      </footer>
+    </div>
+
+    <script type="application/json" id="replay-data">{
+ "business": "Texas Hand Wash",
+ "date": "November 18, 2026",
+ "answers": [
+  {
+   "n": 1,
+   "question": "Who is the best car detailer in Lakeway, Texas?",
+   "town": "Lakeway",
+   "engine": "ChatGPT",
+   "ai_picks": [
+    "TRZ Shine & Detail",
+    "Xtreme Auto Detail"
+   ],
+   "texas_hand_wash": "not mentioned",
+   "excerpt": "My pick: TRZ Shine & Detail if you want a mobile detailer who comes to your home in Lakeway. Its site reports a 5.0 Google rating from 56 reviews and lists full-detail service starting at $180 for a sedan/coupe. If review volume matters more, Xtreme Auto Detai…"
+  },
+  {
+   "n": 2,
+   "question": "Who is the best car detailer in Lakeway, Texas?",
+   "town": "Lakeway",
+   "engine": "Gemini",
+   "ai_picks": [
+    "Clear Vision Lakeway",
+    "TRZ Shine & Detail"
+   ],
+   "texas_hand_wash": "not mentioned",
+   "excerpt": "Because \"the best\" detailer often depends on whether you are looking for specialized luxury care, mobile convenience, or ceramic coatings, several top-rated local options stand out in the Lakeway, Texas area based on customer satisfaction and quality of work: …"
+  },
+  {
+   "n": 3,
+   "question": "Who is the best car detailer in Lakeway, Texas?",
+   "town": "Lakeway",
+   "engine": "Perplexity",
+   "ai_picks": [
+    "Brightside Detailing",
+    "Texas Auto Club Mobile Detailing",
+    "Taurus Auto Detailing"
+   ],
+   "texas_hand_wash": "not mentioned",
+   "excerpt": "There isn’t a single objectively provable best car detailer in Lakeway, Texas from these results, but the strongest candidates are Brightside Detailing, Taurus Auto Detailing, and Texas Auto Club Mobile Detailing. Brightside has the clearest quality signal in …"
+  },
+  {
+   "n": 4,
+   "question": "Recommend a reliable, well-reviewed car detailer near Bee Cave, TX.",
+   "town": "Bee Cave",
+   "engine": "ChatGPT",
+   "ai_picks": [
+    "Texas Auto Club Mobile Detailing",
+    "Pink’s Mobile Car Detailing"
+   ],
+   "texas_hand_wash": "not mentioned",
+   "excerpt": "My pick: Texas Auto Club Mobile Detailing. It’s based in Bee Cave and comes to your home or workplace; its site reports 4.9 stars across 200+ Google reviews. A full interior-and-exterior detail is listed at $179.99 for a coupe/sedan (larger vehicles may cost m…"
+  },
+  {
+   "n": 5,
+   "question": "Recommend a reliable, well-reviewed car detailer near Bee Cave, TX.",
+   "town": "Bee Cave",
+   "engine": "Gemini",
+   "ai_picks": [
+    "Pink’s Mobile Car Detailing",
+    "Gavin’s Mobile Car Detailing",
+    "Auto Brite Detailing",
+    "TRZ Shine & Detail"
+   ],
+   "texas_hand_wash": "not mentioned",
+   "excerpt": "Because Bee Cave is heavily serviced by mobile detailers who come straight to your home or office (saving you a trip along HWY 71 or RR 620), you have several highly rated, reliable options. Top-reviewed, reliable car detailers that regularly service the Bee C…"
+  },
+  {
+   "n": 6,
+   "question": "Recommend a reliable, well-reviewed car detailer near Bee Cave, TX.",
+   "town": "Bee Cave",
+   "engine": "Perplexity",
+   "ai_picks": [
+    "Texas Auto Club Mobile Detailing",
+    "Brightside Detailing",
+    "Pink’s Mobile Car Detailing",
+    "Elite Detail Pros"
+   ],
+   "texas_hand_wash": "not mentioned",
+   "excerpt": "Here are three reputable, well‑reviewed mobile detailers that serve Bee Cave, TX, along with why they stand out and how to choose between them. --- 1. Texas Auto Club Mobile Detailing (Local to Bee Cave) Why it’s a strong pick - Specifically based in Bee Cave …"
+  },
+  {
+   "n": 7,
+   "question": "I need a car detailer in Steiner Ranch, Texas this week. Who should I call?",
+   "town": "Steiner Ranch",
+   "engine": "ChatGPT",
+   "ai_picks": [
+    "Pink’s Mobile Car Detailing",
+    "Steiner Detail Co",
+    "TRZ Shine & Detail"
+   ],
+   "texas_hand_wash": "not mentioned",
+   "excerpt": "I’d call Pink’s Mobile Car Detailing first: 512-645-1471. They specifically serve Steiner Ranch, list same-day availability, and quote $200 for interior, $250 for full detail, or $150 for exterior. Call or text to confirm a spot this week. If they’re booked, t…"
+  },
+  {
+   "n": 8,
+   "question": "I need a car detailer in Steiner Ranch, Texas this week. Who should I call?",
+   "town": "Steiner Ranch",
+   "engine": "Gemini",
+   "ai_picks": [
+    "Pont Mobile Detailing",
+    "TRZ Shine & Detail"
+   ],
+   "texas_hand_wash": "not mentioned",
+   "excerpt": "For car detailing in Steiner Ranch this week, you have several highly-rated mobile detailers who will come directly to your driveway (saving you from driving down Quinlan Park Road and RM 620). Great local options to call or check out include: Pont Mobile Deta…"
+  },
+  {
+   "n": 9,
+   "question": "I need a car detailer in Steiner Ranch, Texas this week. Who should I call?",
+   "town": "Steiner Ranch",
+   "engine": "Perplexity",
+   "ai_picks": [
+    "Duke’s",
+    "Pink’s Mobile Car Detailing",
+    "SHWASH",
+    "RDR Detailing"
+   ],
+   "texas_hand_wash": "mentioned",
+   "excerpt": "If you need a mobile detailer in Steiner Ranch this week, the best matches from the results are Duke’s, Pink’s, SHWASH, and RDR Detailing. All four say they serve Steiner Ranch and have phone numbers you can call or text.[2][3][4][5] - Duke’s — mobile detailin…"
+  },
+  {
+   "n": 10,
+   "question": "What are the top-rated family-owned or local car detailers serving Lakeway, Texas?",
+   "town": "Lakeway",
+   "engine": "ChatGPT",
+   "ai_picks": [
+    "Texas Hand Wash",
+    "TRZ Shine & Detail",
+    "TSR Mobile Detailing"
+   ],
+   "texas_hand_wash": "recommended",
+   "excerpt": "Here are the strongest family-owned or locally run detailers serving Lakeway, balancing ratings with evidence they’re genuinely local. Ratings and review counts can change, so it’s worth checking the latest reviews before booking. | Detailer | Why it’s worth a…"
+  },
+  {
+   "n": 11,
+   "question": "What are the top-rated family-owned or local car detailers serving Lakeway, Texas?",
+   "town": "Lakeway",
+   "engine": "Gemini",
+   "ai_picks": [
+    "Texas Hand Wash & Detailing",
+    "Clear Vision Lakeway",
+    "TSR Mobile Detailing"
+   ],
+   "texas_hand_wash": "recommended",
+   "excerpt": "When looking for top-rated, locally owned, or family-operated car detailers serving the Lakeway, Texas area, several stand out due to their specialized knowledge of the local climate (dealing with intense UV rays, cedar pollen, hard well water, and Lake Travis…"
+  },
+  {
+   "n": 12,
+   "question": "What are the top-rated family-owned or local car detailers serving Lakeway, Texas?",
+   "town": "Lakeway",
+   "engine": "Perplexity",
+   "ai_picks": [
+    "Texas Hand Wash",
+    "Brightside Detailing"
+   ],
+   "texas_hand_wash": "recommended",
+   "excerpt": "Here are the top-rated local or family-owned car detailers serving Lakeway, Texas based on the strongest review signals in the results you provided: - Texas Hand Wash — Lakeway, TX. It is described as a family-owned full-service hand car wash and detailing sho…"
+  },
+  {
+   "n": 13,
+   "question": "Which car detailers near Bee Cave, Texas have been in business the longest?",
+   "town": "Bee Cave",
+   "engine": "ChatGPT",
+   "ai_picks": [
+    "The Wax Shack Auto Detailing",
+    "Dan’s Detail",
+    "AutoBrite Detailing",
+    "Texas Auto Club Mobile Detailing"
+   ],
+   "texas_hand_wash": "not mentioned",
+   "excerpt": "Based on the publicly stated start dates I could verify, the longest-running options are: 1. The Wax Shack Auto Detailing — since 1982 The oldest I found in the Austin area. It’s a family-run shop at 301 W. Koenig Lane, Austin—farther from Bee Cave than the ot…"
+  },
+  {
+   "n": 14,
+   "question": "Which car detailers near Bee Cave, Texas have been in business the longest?",
+   "town": "Bee Cave",
+   "engine": "Gemini",
+   "ai_picks": [
+    "Coachworks Car Wash, Lube & Detail Center",
+    "Finish Line Car Wash"
+   ],
+   "texas_hand_wash": "not mentioned",
+   "excerpt": "When looking at car detailing and wash centers that have served the Bee Cave and immediate western Austin/Westlake corridor the longest, established brick-and-mortar operations stand out: Coachworks Car Wash, Lube & Detail Center (located on Juniper Trace just…"
+  },
+  {
+   "n": 15,
+   "question": "Which car detailers near Bee Cave, Texas have been in business the longest?",
+   "town": "Bee Cave",
+   "engine": "Perplexity",
+   "ai_picks": [
+    "Coachworks Car Wash / A Cut Above",
+    "Finish Line Car Wash",
+    "Dan’s Detail",
+    "Texas Auto Club Mobile Detailing"
+   ],
+   "texas_hand_wash": "not mentioned",
+   "excerpt": "Among the car detailers near Bee Cave in the results, the longest-running businesses appear to be Coachworks Car Wash / A Cut Above and Finish Line Car Wash, both tied to detailed services and both claiming origins in 1999 or earlier service history in the are…"
+  }
+ ],
+ "totals": {
+  "texas_hand_wash_recommended": 3,
+  "answers": 15,
+  "top_competitors": [
+   [
+    "TRZ Shine & Detail",
+    6
+   ],
+   [
+    "Texas Auto Club Mobile Detailing",
+    5
+   ],
+   [
+    "Pink's Mobile Car Detailing",
+    5
+   ],
+   [
+    "Brightside Detailing",
+    3
+   ],
+   [
+    "Clear Vision Lakeway",
+    2
+   ]
+  ]
+ }
+}</script>
+    <script src="hark.js"></script>
+    <script>
+      (function () {
+        var DATA = JSON.parse(document.getElementById("replay-data").textContent);
+        var A = DATA.answers, N = A.length, YOU = "Texas Hand Wash";
+        var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var $ = function (id) { return document.getElementById(id); };
+
+        function norm(name) {
+          var n = name.replace(/\u2019/g, "'").trim();
+          if (n.indexOf(YOU) === 0) return YOU;
+          if (n === "Auto Brite Detailing") return "AutoBrite Detailing";
+          return n;
+        }
+        function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+
+        /* ---- Scoreboard ---- */
+        var race = $("race"), rows = {}, ROW_H = 48;
+        function standings(done) {
+          var counts = {}, first = {};
+          counts[YOU] = 0; first[YOU] = -1;
+          for (var i = 0; i < done; i++) {
+            var seen = {};
+            A[i].ai_picks.forEach(function (p, k) {
+              var n = norm(p);
+              if (seen[n]) return;
+              seen[n] = true;
+              if (!(n in counts)) { counts[n] = 0; first[n] = i * 10 + k; }
+              counts[n]++;
+            });
+          }
+          var names = Object.keys(counts).sort(function (a, b) {
+            if (counts[b] !== counts[a]) return counts[b] - counts[a];
+            if (a === YOU) return 1; if (b === YOU) return -1;
+            return first[a] - first[b];
+          });
+          var shown = names.filter(function (n) { return n !== YOU && counts[n] > 0; }).slice(0, 5);
+          var youAt = names.indexOf(YOU);
+          var list = names.filter(function (n) { return n === YOU || shown.indexOf(n) >= 0; });
+          if (list.indexOf(YOU) < 0) list.push(YOU);
+          return { list: list, counts: counts };
+        }
+        function renderBoard(done) {
+          var s = standings(done), max = 1;
+          s.list.forEach(function (n) { max = Math.max(max, s.counts[n]); });
+          Object.keys(rows).forEach(function (n) {
+            if (s.list.indexOf(n) < 0) { rows[n].style.opacity = "0"; rows[n].style.pointerEvents = "none"; }
+          });
+          s.list.forEach(function (n, i) {
+            var r = rows[n];
+            if (!r) {
+              r = document.createElement("div");
+              r.className = "x-row" + (n === YOU ? " is-you" : "");
+              r.innerHTML = '<p class="x-row-name"><span>' + esc(n) + '</span><b>0</b></p><div class="x-track"><div class="x-fill"></div></div>';
+              r.style.transform = "translateY(" + i * ROW_H + "px)";
+              r.style.opacity = "0";
+              race.appendChild(r);
+              rows[n] = r;
+              void r.offsetWidth;
+            }
+            r.style.opacity = "1";
+            r.style.transform = "translateY(" + i * ROW_H + "px)";
+            r.querySelector("b").textContent = s.counts[n];
+            r.querySelector(".x-fill").style.width = (s.counts[n] / max) * 100 + "%";
+          });
+          race.style.height = s.list.length * ROW_H + "px";
+          $("board-note").textContent = done === 0
+            ? "Answers that recommended each business, so far."
+            : "After " + done + " of " + N + " answers. Top 5 plus Texas Hand Wash.";
+        }
+
+        /* ---- Player ---- */
+        var idx = -1, playing = false, started = false, counted = 0;
+        var timer = null, pending = null, dueAt = 0, remaining = 0;
+
+        function later(fn, ms) {
+          clearTimeout(timer);
+          pending = fn; remaining = ms; dueAt = Date.now() + ms;
+          if (playing) timer = setTimeout(function () { var f = pending; pending = null; f(); }, ms);
+        }
+        function setPlaying(p) {
+          playing = p;
+          $("toggle").textContent = p ? "Pause" : "Play";
+          $("toggle").classList.toggle("x-ctrl--blue", !p);
+          if (!p) {
+            clearTimeout(timer);
+            if (pending) remaining = Math.max(0, dueAt - Date.now());
+          } else if (pending) {
+            dueAt = Date.now() + remaining;
+            timer = setTimeout(function () { var f = pending; pending = null; f(); }, remaining);
+          }
+        }
+
+        var STATUS = {
+          recommended: "Recommended",
+          mentioned: "Mentioned, not recommended",
+          "not mentioned": "Not mentioned"
+        };
+
+        function show(i, instant) {
+          idx = i;
+          var a = A[i];
+          $("count").textContent = "Answer " + (i + 1) + " of " + N;
+          $("progress").style.width = ((i + 1) / N) * 100 + "%";
+          $("screen").innerHTML =
+            '<div style="display:grid;gap:18px">' +
+            '<div class="x-q"><p class="x-town">Driver in ' + esc(a.town) + '</p><p class="x-bubble" id="bubble"></p></div>' +
+            '<div class="x-a" id="answer"><span class="x-engine">' + esc(a.engine) + '</span>' +
+            '<div class="x-thinking" id="thinking" hidden><span class="x-dots" aria-hidden="true"><i></i><i></i><i></i></span>' + esc(a.engine) + ' is thinking…</div>' +
+            '<div id="result" hidden></div></div></div>';
+          var bubble = $("bubble"), q = a.question;
+          if (instant) { bubble.textContent = q; reveal(a); return; }
+          var c = 0, step = Math.max(10, Math.min(18, 1100 / q.length));
+          bubble.innerHTML = '<span id="typed"></span><span class="x-caret"></span>';
+          (function type() {
+            c += 1;
+            $("typed").textContent = q.slice(0, c);
+            if (c < q.length) later(type, step);
+            else { bubble.textContent = q; $("thinking").hidden = false; later(function () { reveal(a); }, 800); }
+          })();
+        }
+
+        function reveal(a) {
+          var th = $("thinking"); if (th) th.hidden = true;
+          var res = $("result");
+          var chips = a.ai_picks.map(function (p, k) {
+            var you = norm(p) === YOU;
+            return '<li class="' + (you ? "is-you" : "") + '" style="animation-delay:' + (reduce ? 0 : k * 120) + 'ms"><b>' + (k + 1) + "</b>" + esc(p) + (you ? " ✓" : "") + "</li>";
+          }).join("");
+          res.innerHTML =
+            '<div style="display:grid;gap:12px">' +
+            '<p class="x-picks-label">AI recommended:</p><ol class="x-picks">' + chips + "</ol>" +
+            '<p class="x-status" data-s="' + esc(a.texas_hand_wash) + '">Texas Hand Wash:&nbsp;<span>' + (STATUS[a.texas_hand_wash] || a.texas_hand_wash) + "</span></p>" +
+            '<details class="x-read"><summary>Read the answer</summary><p>' + esc(a.excerpt) + "</p></details></div>";
+          res.hidden = false;
+          if (counted < idx + 1) { counted = idx + 1; renderBoard(counted); }
+          later(advance, reduce ? 3500 : 1700);
+        }
+
+        function advance() {
+          if (idx + 1 < N) show(idx + 1, reduce);
+          else finish(false);
+        }
+
+        function finish(jump) {
+          clearTimeout(timer); pending = null;
+          setPlaying(false);
+          if (counted < N) { counted = N; renderBoard(N); }
+          $("toggle").textContent = "Replay";
+          $("next").disabled = true;
+          $("count").textContent = "Replay complete · " + N + " of " + N;
+          $("progress").style.width = "100%";
+          var res = $("results");
+          var wasHidden = res.hidden;
+          res.hidden = false;
+          if (jump || wasHidden) res.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+        }
+
+        function start() {
+          started = true;
+          counted = 0; rows = {}; race.innerHTML = ""; renderBoard(0);
+          $("next").disabled = false;
+          setPlaying(true);
+          show(0, reduce);
+        }
+
+        $("start").addEventListener("click", function () {
+          $("replay").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+          start();
+        });
+        $("start2").addEventListener("click", start);
+        $("toggle").addEventListener("click", function () {
+          if (!started || $("toggle").textContent === "Replay") { start(); return; }
+          setPlaying(!playing);
+        });
+        $("next").addEventListener("click", function () {
+          if (!started) { start(); return; }
+          clearTimeout(timer); pending = null;
+          if (counted < idx + 1) { counted = idx + 1; renderBoard(counted); }
+          if (idx + 1 < N) show(idx + 1, reduce || !playing);
+          else finish(false);
+        });
+        $("skip").addEventListener("click", function (e) {
+          e.preventDefault();
+          started = true;
+          if (idx < 0) show(N - 1, true);
+          finish(true);
+        });
+
+        /* ---- Results ---- */
+        var T = DATA.totals, top = T.top_competitors;
+        $("headline").innerHTML = "Texas Hand Wash was recommended in <b>" + T.texas_hand_wash_recommended + " of " + T.answers +
+          "</b> answers. " + esc(top[0][0]) + " was recommended in " + top[0][1] + ".";
+        var fin = top.map(function (t) { return { n: t[0], c: t[1] }; });
+        var at = fin.length;
+        for (var i = 0; i < fin.length; i++) if (fin[i].c < T.texas_hand_wash_recommended) { at = i; break; }
+        fin.splice(at, 0, { n: YOU, c: T.texas_hand_wash_recommended, you: true });
+        $("final").innerHTML = fin.map(function (f, i) {
+          return '<div class="row' + (f.you ? " is-you" : "") + '"><dt>' + (i + 1) + ". " + esc(f.n) + "</dt><dd>" + f.c + " of " + T.answers + "</dd></div>";
+        }).join("");
+
+        renderBoard(0);
+        $("next").disabled = false;
+
+        /* ---- Form ---- */
+        var form = $("book-form");
+        form.addEventListener("submit", function (e) {
+          if (!window.fetch || !window.FormData) return;
+          e.preventDefault();
+          var btn = $("submit"), err = $("form-error");
+          btn.disabled = true; btn.textContent = "Sending…"; err.hidden = true;
+          fetch(form.action, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" } })
+            .then(function (r) {
+              if (!r.ok) throw new Error("bad");
+              form.hidden = true; $("thanks").hidden = false;
+            })
+            .catch(function () { form.submit(); });
+        });
+      })();
+    </script>
+  <script data-goatcounter="https://firstlocal.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
