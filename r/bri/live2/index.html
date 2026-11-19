@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>AI Visibility Report | Brito Remodeling | 1stLocal</title>
+    <script>
+      (function () {
+        var w = console.warn;
+        console.warn = function () {
+          var m = arguments[0];
+          if (typeof m === "string" && m.indexOf("cdn.tailwindcss.com should not be used in production") !== -1) return;
+          return w.apply(console, arguments);
+        };
+      })();
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .x-dots {
+        background-image: radial-gradient(rgba(148, 163, 184, 0.35) 1px, transparent 1px),
+          linear-gradient(rgba(59, 130, 246, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(59, 130, 246, 0.08) 1px, transparent 1px);
+        background-size: 14px 14px, 56px 56px, 56px 56px;
+      }
+      .x-caret::after {
+        content: "";
+        display: inline-block;
+        width: 2px;
+        height: 1em;
+        margin-left: 2px;
+        vertical-align: -0.15em;
+        background: #60a5fa;
+        animation: x-blink 0.9s steps(1) infinite;
+      }
+      @keyframes x-blink { 50% { opacity: 0; } }
+      .x-pop { animation: x-pop 0.45s ease-out; display: inline-block; }
+      @keyframes x-pop { 0% { transform: scale(1.25); text-shadow: 0 0 12px rgba(74, 222, 128, 0.9); } 100% { transform: scale(1); text-shadow: none; } }
+      .x-bar { transition: width 1.1s cubic-bezier(0.22, 1, 0.36, 1); }
+      @media (prefers-reduced-motion: reduce) {
+        .x-pop, .x-caret::after { animation: none; }
+        .x-bar { transition: none; }
+        html { scroll-behavior: auto; }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-950 text-gray-100 font-sans antialiased pb-40">
+    <header class="relative bg-gray-900 border-b border-gray-800 overflow-hidden">
+      <div class="x-dots absolute inset-0" aria-hidden="true"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-gray-950/90 to-gray-950" aria-hidden="true"></div>
+      <div class="relative px-5 pt-8 pb-7 max-w-md mx-auto text-center">
+        <p class="text-blue-500 font-bold text-lg tracking-tight">1stLocal</p>
+        <h1 class="mt-4 text-3xl font-bold tracking-tight text-white">AI Visibility Test</h1>
+        <p class="mt-2 text-base text-gray-300">Home remodelers in Austin, Pflugerville &amp; Round Rock</p>
+        <p class="mt-4 text-xs leading-relaxed text-gray-400">
+          We asked ChatGPT, Gemini and Perplexity 5 questions a homeowner might ask. 15 answers, recorded November 18, 2026.
+        </p>
+      </div>
+    </header>
+
+    <main class="p-4 max-w-md mx-auto">
+      <div class="flex items-center justify-between gap-3 mb-6 mt-2">
+        <button id="start-btn" type="button" class="inline-flex items-center gap-2 rounded-lg bg-gray-800 border border-gray-700 px-4 py-2.5 text-sm font-semibold text-white hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
+          <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M6 4.5v11l9-5.5-9-5.5z" /></svg>
+          <span id="start-label">Start replay</span>
+        </button>
+        <p id="progress" class="text-xs text-gray-400" aria-live="polite">0 of 15 answers</p>
+      </div>
+
+      <div id="chat-container" class="space-y-6" aria-label="Replay of 15 AI answers"></div>
+
+      <section id="scorecard-reveal" class="opacity-0 translate-y-10 transition-all duration-700 ease-out mt-10 bg-gray-900 border border-gray-800 rounded-xl p-6" aria-labelledby="score-title">
+        <h2 id="score-title" class="text-xl font-bold text-white">Final AI Recommendations</h2>
+        <p class="mt-1 text-sm text-gray-400">Answers that recommended each business, out of 15</p>
+        <div id="bars" class="mt-6 space-y-4"></div>
+        <div class="mt-5 pt-5 border-t border-gray-800">
+          <div class="flex items-baseline justify-between gap-3 text-sm">
+            <span class="font-semibold text-white">Brito Remodeling (You)</span>
+            <span class="font-bold text-red-400 text-lg">0</span>
+          </div>
+          <div class="mt-2 h-6 rounded-full border-2 border-dashed border-red-500/70 flex items-center justify-center">
+            <span class="text-xs font-bold tracking-widest text-red-400">NOT NAMED</span>
+          </div>
+        </div>
+        <p class="mt-6 text-sm leading-relaxed text-gray-300">
+          AI never named Brito Remodeling, even in Pflugerville, where you're based. It sent homeowners to 40-plus other remodelers, usually ones with awards, Houzz profiles and lots of reviews it could cite. That's fixable.
+        </p>
+        <p class="mt-4 text-xs leading-relaxed text-gray-400">
+          One pass of 5 questions through each AI's API on November 18, 2026: a snapshot, not a rate. Answers can differ in the consumer apps.
+        </p>
+      </section>
+
+      <footer class="mt-12 text-center text-xs leading-relaxed text-gray-400 space-y-2">
+        <p>Zane Haas · 1stLocal</p>
+        <p class="flex flex-wrap justify-center gap-x-4"><a class="inline-flex items-center min-h-[44px] px-1 underline hover:text-gray-200" href="mailto:zane@firstlocal.io">zane@firstlocal.io</a><a class="inline-flex items-center min-h-[44px] px-1 underline hover:text-gray-200" href="tel:+15125167733">(512) 516-7733</a></p>
+        <p>100% of 1stLocal's profits go to Kids and Planet Foundation, our family's nonprofit.</p>
+        <p class="flex flex-wrap justify-center gap-x-4"><a class="inline-flex items-center min-h-[44px] px-1 underline hover:text-gray-200" href="https://kidsandplanet.com" target="_blank" rel="noopener">kidsandplanet.com</a><a class="inline-flex items-center min-h-[44px] px-1 text-blue-400 underline hover:text-blue-300" href="https://firstlocal.io" target="_blank" rel="noopener">firstlocal.io</a></p>
+      </footer>
+    </main>
+
+    <button id="skip-btn" type="button" class="fixed right-4 bottom-44 z-40 rounded-full bg-gray-800/90 backdrop-blur border border-gray-700 px-4 py-2 text-xs font-semibold text-gray-200 shadow-lg hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
+      Skip to results ↓
+    </button>
+
+    <div id="cta" class="fixed bottom-0 inset-x-0 w-full bg-gray-950/95 backdrop-blur-md border-t border-gray-800 p-4 z-50">
+      <div class="max-w-md mx-auto text-center">
+        <p class="text-sm text-gray-200">No pressure. Let's look at your data together.</p>
+        <p class="text-xs text-gray-400 mt-0.5">100% of profits go to Kids and Planet Foundation</p>
+        <button id="open-modal" type="button" aria-haspopup="dialog" aria-controls="book-modal" class="mt-3 w-full bg-blue-600 hover:bg-blue-500 py-3.5 rounded-lg font-bold text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300">
+          Book 15 minutes with Zane
+        </button>
+        <p class="mt-2 text-xs text-gray-400">Starter Fix: $199 flat, with a 90-day retest.</p>
+      </div>
+    </div>
+
+    <div id="book-modal" class="hidden fixed inset-0 z-[60]" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div id="modal-backdrop" class="absolute inset-0 bg-black/70 transition-opacity duration-300 opacity-0"></div>
+      <div id="modal-sheet" class="absolute bottom-0 inset-x-0 mx-auto w-full max-w-md bg-gray-900 border border-gray-800 border-b-0 rounded-t-2xl p-5 pb-8 shadow-2xl transition-transform duration-300 ease-out translate-y-full max-h-[92vh] overflow-y-auto">
+        <div class="mx-auto mb-4 h-1 w-10 rounded-full bg-gray-700" aria-hidden="true"></div>
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <h2 id="modal-title" class="text-lg font-bold text-white">Book 15 minutes with Zane</h2>
+            <p class="mt-1 text-sm text-gray-400">We'll walk through Brito Remodeling's results together.</p>
+          </div>
+          <button id="close-modal" type="button" aria-label="Close" class="-mr-2 -mt-1 w-11 h-11 inline-flex items-center justify-center rounded-full text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
+            <svg class="w-5 h-5" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" /></svg>
+          </button>
+        </div>
+
+        <form id="book-form" class="mt-5 space-y-4" action="https://formspree.io/f/xrpqzzon" method="POST" novalidate>
+          <input type="hidden" name="business" value="Brito Remodeling" />
+          <input type="hidden" name="code" value="bri" />
+          <input type="hidden" name="source" value="live-score-v2" />
+          <input type="hidden" name="_subject" value="Book a call: Brito Remodeling live score (bri)" />
+          <div>
+            <label for="f-name" class="block text-sm font-medium text-gray-300">Name <span class="text-red-400">*</span></label>
+            <input id="f-name" name="name" type="text" required autocomplete="name" class="mt-1 w-full rounded-lg bg-gray-950 border border-gray-700 px-3 py-3 text-base text-white placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label for="f-email" class="block text-sm font-medium text-gray-300">Email <span class="text-red-400">*</span></label>
+            <input id="f-email" name="email" type="email" required autocomplete="email" class="mt-1 w-full rounded-lg bg-gray-950 border border-gray-700 px-3 py-3 text-base text-white placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label for="f-phone" class="block text-sm font-medium text-gray-300">Phone <span class="text-gray-400 font-normal">(optional)</span></label>
+            <input id="f-phone" name="phone" type="tel" autocomplete="tel" class="mt-1 w-full rounded-lg bg-gray-950 border border-gray-700 px-3 py-3 text-base text-white placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label for="f-time" class="block text-sm font-medium text-gray-300">Best time to reach you <span class="text-gray-400 font-normal">(optional)</span></label>
+            <input id="f-time" name="best_time" type="text" placeholder="e.g. weekday mornings" class="mt-1 w-full rounded-lg bg-gray-950 border border-gray-700 px-3 py-3 text-base text-white placeholder-gray-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" />
+          </div>
+          <p id="form-error" class="hidden text-sm text-red-400" role="alert"></p>
+          <button id="submit-btn" type="submit" class="w-full bg-blue-600 hover:bg-blue-500 disabled:opacity-60 py-3.5 rounded-lg font-bold text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-300">Book my 15 minutes</button>
+          <p class="text-center text-xs text-gray-400">We use this address only to reply to you.</p>
+        </form>
+        <div id="form-success" class="hidden mt-6 rounded-lg border border-green-500/30 bg-green-500/10 p-4 text-center text-green-300 font-semibold" role="status">
+          Thanks! Zane will reach out within one business day.
+        </div>
+      </div>
+    </div>
+
+    <script type="application/json" id="replay-data">
+{"business":"Brito Remodeling","date":"November 18, 2026","answers":[{"n":1,"question":"Who is the best home remodeling contractor in Austin, Texas?","town":"Austin","engine":"ChatGPT","ai_picks":["Skelly Build","Together Design & Build","CG&S Design-Build"],"brito_remodeling":"not mentioned","excerpt":"There isn’t one objectively “best” contractor for every Austin remodel. For a broad, design-build recommendation, I’d start by interviewing Skelly Build: it was Austin NARI’s 2025 Remodeler of the Year and won awards across several project types, including kit…"},{"n":2,"question":"Who is the best home remodeling contractor in Austin, Texas?","town":"Austin","engine":"Gemini","ai_picks":["CG&S Design-Build","Prime Construction","Revent Renovations / Revent Builds","SkyWest Builders","THA Construction & Remodeling","Bat City Builders","Catalyst Construction & General Contractors"],"brito_remodeling":"not mentioned","excerpt":"Because the \"best\" home remodeling contractor depends heavily on your specific project type , budget, and neighborhood, there is no single definitive choice. However, several highly rated and reputable remodeling contractors and design-build firms consistently…"},{"n":3,"question":"Who is the best home remodeling contractor in Austin, Texas?","town":"Austin","engine":"Perplexity","ai_picks":["Together Design & Build","Prime Construction and Remodeling","ACE Remodeling TX","THA Construction & Remodeling","Skelly Build"],"brito_remodeling":"not mentioned","excerpt":"There isn’t a single objectively “best” home remodeling contractor in Austin, but Together Design & Build stands out the most in the results you provided because it has the largest review base and a 5.0 rating from 300+ Google reviews.[1][16] If you want a sho…"},{"n":4,"question":"Recommend a reliable, well-reviewed home remodeling contractor near Pflugerville, TX.","town":"Pflugerville","engine":"ChatGPT","ai_picks":["Supreme Remodel & Construction LLC","HD Paint & Home Remodeling LLC"],"brito_remodeling":"not mentioned","excerpt":"For a Pflugerville-based option, I’d start with Supreme Remodel & Construction LLC. It’s listed in Pflugerville and BBB shows it as A+ rated and accredited, with kitchen and bathroom remodels, additions, decks, and patio covers among its services. I’d also get…"},{"n":5,"question":"Recommend a reliable, well-reviewed home remodeling contractor near Pflugerville, TX.","town":"Pflugerville","engine":"Gemini","ai_picks":["Residential Renovations 512","Tayton Remodeling","Supreme Builders Group"],"brito_remodeling":"not mentioned","excerpt":"When looking for a reliable, well-reviewed home remodeling contractor in or around Pflugerville, Texas, several local companies consistently receive top marks from homeowners for communication, quality craftsmanship, and project management. Highly recommended…"},{"n":6,"question":"Recommend a reliable, well-reviewed home remodeling contractor near Pflugerville, TX.","town":"Pflugerville","engine":"Perplexity","ai_picks":["THA Construction & Remodeling","Cohen Homes","Renovate 512","Together Design & Build","Katz Builders, Inc.","Infinity Handyman & Home Remodeling Services"],"brito_remodeling":"not mentioned","excerpt":"A strong option near Pflugerville is THA Construction & Remodeling: it’s a local contractor that explicitly serves Pflugerville and the greater Austin area, and its Houzz profile describes it as specializing in luxury kitchen remodels, high-end bathroom renova…"},{"n":7,"question":"I need a home remodeling contractor in Round Rock, Texas this week. Who should I call?","town":"Round Rock","engine":"ChatGPT","ai_picks":["ATX Elite Construction","Carlos Home Remodeling"],"brito_remodeling":"not mentioned","excerpt":"Call ATX Elite Construction at (512) 358-4143 as a first option. It’s based in Round Rock and lists kitchen and bathroom remodels, among other home-improvement work. A local directory reports a 4.9 rating from 51 reviews, but treat that as a starting point—not…"},{"n":8,"question":"I need a home remodeling contractor in Round Rock, Texas this week. Who should I call?","town":"Round Rock","engine":"Gemini","ai_picks":["Renaissance Contracting","Diverse Trades Custom Construction and Remodeling","Alter Construction","Reborn Construction Services"],"brito_remodeling":"not mentioned","excerpt":"Finding a reliable home remodeling contractor on short notice can be tough, especially if you are hoping to kick off consultations or work \"this week.\" Because full-scale remodeling projects typically require scheduling, design planning, and permits, your best…"},{"n":9,"question":"I need a home remodeling contractor in Round Rock, Texas this week. Who should I call?","town":"Round Rock","engine":"Perplexity","ai_picks":["Carlos Home Remodeling, LLC","ATX Custom Remodel","Freddy’s Make Ready & Home Remodeling LLC"],"brito_remodeling":"not mentioned","excerpt":"If you need a home remodeling contractor in Round Rock this week, start with these local options that appear to serve Round Rock and have current listings or strong local presence:[1][3][8][10][15] - Carlos Home Remodeling, LLC — listed by BBB as a remodeling…"},{"n":10,"question":"What are the top-rated family-owned or local home remodeling contractors serving Austin, Texas?","town":"Austin","engine":"ChatGPT","ai_picks":["CG&S Design-Build","Pro Tech Construction","Catalyst Construction","LFM Construction & Remodeling","Dardon’s Custom Woodworks & Remodeling"],"brito_remodeling":"not mentioned","excerpt":"Here’s a shortlist of well-reviewed, locally based or family-owned remodelers serving Austin. “Top-rated” varies by review platform, so treat these as strong candidates to compare—not a definitive ranking. | Contractor | What stands out | Review signal | |---|…"},{"n":11,"question":"What are the top-rated family-owned or local home remodeling contractors serving Austin, Texas?","town":"Austin","engine":"Gemini","ai_picks":["CG&S Design-Build","Catalyst Construction & General Contractors","THA Construction & Remodeling","ACE Remodeling TX","Capitol City Wood Works LLC","Realty Restoration, LLC"],"brito_remodeling":"not mentioned","excerpt":"When looking for top-rated, local, or family-owned home remodeling contractors in Austin, Texas, several companies stand out for their craftsmanship, community roots, and strong customer satisfaction ratings. The following reputable local and family-owned or o…"},{"n":12,"question":"What are the top-rated family-owned or local home remodeling contractors serving Austin, Texas?","town":"Austin","engine":"Perplexity","ai_picks":["THA Construction & Remodeling","Capitol City Wood Works LLC","Pro Tech Construction Inc","Marich, Inc.","Austin’s Home Renovation","Catalyst Construction, Inc."],"brito_remodeling":"not mentioned","excerpt":"Here are some well‑rated, family‑owned or clearly local home remodeling contractors serving the Austin area, along with what they’re best at and how they’re rated. Use this as a shortlist to interview, not a final endorsement—always verify current licenses, in…"},{"n":13,"question":"Which home remodeling contractors near Pflugerville, Texas have been in business the longest?","town":"Pflugerville","engine":"ChatGPT","ai_picks":["CG&S Design-Build","MHM Remodeling","Renaissance Contracting Services","Ralph’s Remodeling & Painting"],"brito_remodeling":"not mentioned","excerpt":"The longest-established options I could verify are: | Contractor | Reported start | Approx. time in business | Notes | |---|---:|---:|---| | CG&S Design-Build | 1957 | About 69 years | Austin-based renovation firm; likely the oldest on this list. Its site says…"},{"n":14,"question":"Which home remodeling contractors near Pflugerville, Texas have been in business the longest?","town":"Pflugerville","engine":"Gemini","ai_picks":["Martinez Home Renovation LLC","Golden State Builders Group"],"brito_remodeling":"not mentioned","excerpt":"When looking for established home remodeling and general contracting services in and around Pflugerville, Texas, a few local operations stand out for having multi-decade track records. While many independent contractors operate on a project-to-project basis or…"},{"n":15,"question":"Which home remodeling contractors near Pflugerville, Texas have been in business the longest?","town":"Pflugerville","engine":"Perplexity","ai_picks":["ATX Builders","maverick construction and remoldeling","Ressling Builders Corp","John Henry Home Solutions","Longhorn Restoration & Construction","Ralph's Remodeling & Painting"],"brito_remodeling":"not mentioned","excerpt":"Based on the results provided, the longest-established home remodeling contractors near Pflugerville appear to be: - ATX Builders — 57 years in business (started 1969). This is the oldest business listed in the results and is specifically a remodel contractor…"}],"totals":{"brito_remodeling_recommended":0,"answers":15,"top_competitors":[["CG&S Design-Build",5],["THA Construction & Remodeling",5],["Together Design & Build",3],["Skelly Build",2],["Catalyst Construction & General Contractors",2],["ACE Remodeling TX",2]]}}
+    </script>
+
+    <script>
+      (function () {
+        var data = JSON.parse(document.getElementById("replay-data").textContent);
+        var answers = data.answers;
+        var CHAR_MS = 11;
+        var GAP_MS = 1300;
+        var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        var chat = document.getElementById("chat-container");
+        var startBtn = document.getElementById("start-btn");
+        var startLabel = document.getElementById("start-label");
+        var skipBtn = document.getElementById("skip-btn");
+        var progress = document.getElementById("progress");
+        var reveal = document.getElementById("scorecard-reveal");
+        var cta = document.getElementById("cta");
+
+        var started = false, finished = false, current = 0, timer = null, raf = null;
+
+        function escapeRe(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }
+
+        // Split an excerpt into plain and green segments.
+        function segments(text, picks) {
+          var names = picks.slice().sort(function (a, b) { return b.length - a.length; });
+          var found = [];
+          names.forEach(function (n) {
+            var re = new RegExp(escapeRe(n), "gi"), m;
+            while ((m = re.exec(text))) {
+              var s = m.index, e = s + m[0].length;
+              var overlap = found.some(function (f) { return s < f.e && e > f.s; });
+              if (!overlap) found.push({ s: s, e: e });
+            }
+          });
+          found.sort(function (a, b) { return a.s - b.s; });
+          var out = [], pos = 0;
+          found.forEach(function (f) {
+            if (f.s > pos) out.push({ t: text.slice(pos, f.s), g: false });
+            out.push({ t: text.slice(f.s, f.e), g: true });
+            pos = f.e;
+          });
+          if (pos < text.length) out.push({ t: text.slice(pos), g: false });
+          return out;
+        }
+
+        function el(tag, cls, text) {
+          var e = document.createElement(tag);
+          if (cls) e.className = cls;
+          if (text != null) e.textContent = text;
+          return e;
+        }
+
+        // Build the shell of one exchange.
+        function buildItem(a) {
+          var wrap = el("article", "space-y-2");
+          wrap.appendChild(el("p", "text-xs font-semibold uppercase tracking-wider text-gray-400", a.engine + " · " + a.town));
+          var u = el("div", "flex justify-end");
+          u.appendChild(el("div", "bg-blue-600 text-white rounded-2xl rounded-tr-sm px-4 py-3 max-w-[85%] text-sm leading-relaxed", a.question));
+          wrap.appendChild(u);
+          var ai = el("div", "flex justify-start");
+          var bubble = el("div", "bg-gray-800 border border-gray-700 text-gray-100 rounded-2xl rounded-tl-sm px-4 py-3 max-w-[90%] text-sm leading-relaxed min-h-[2.75rem]");
+          var head = el("p", "mb-1 text-xs font-semibold text-gray-400", a.engine);
+          var body = el("p", "break-words");
+          bubble.appendChild(head);
+          bubble.appendChild(body);
+          ai.appendChild(bubble);
+          wrap.appendChild(ai);
+          var verdict = el("p", "pl-1 text-xs text-red-400 opacity-0 transition-opacity duration-500", "Brito Remodeling: not named");
+          wrap.appendChild(verdict);
+          chat.appendChild(wrap);
+          var text = a.excerpt.replace(/\s*[\r\n]+\s*/g, " ");
+          return { wrap: wrap, bubble: bubble, body: body, verdict: verdict, segs: segments(text, a.ai_picks || []), total: text.length };
+        }
+
+        function renderFull(item) {
+          item.body.textContent = "";
+          item.segs.forEach(function (s) {
+            if (s.g) item.body.appendChild(el("span", "text-green-400 font-bold", s.t));
+            else item.body.appendChild(document.createTextNode(s.t));
+          });
+          item.body.classList.remove("x-caret");
+          item.verdict.classList.remove("opacity-0");
+        }
+
+        // Render the first n characters, popping a name green once it completes.
+        function renderTo(item, n) {
+          if (!item.st) item.st = { seg: 0, off: 0, done: 0, node: null };
+          var st = item.st;
+          while (st.done < n && st.seg < item.segs.length) {
+            var s = item.segs[st.seg];
+            var take = Math.min(n - st.done, s.t.length - st.off);
+            if (!st.node) {
+              st.node = s.g ? el("span", "text-gray-100") : document.createTextNode("");
+              item.body.appendChild(st.node);
+            }
+            st.node.textContent += s.t.substr(st.off, take);
+            st.off += take;
+            st.done += take;
+            if (st.off >= s.t.length) {
+              if (s.g) st.node.className = "text-green-400 font-bold x-pop";
+              st.seg += 1;
+              st.off = 0;
+              st.node = null;
+            }
+          }
+        }
+
+        var lastScroll = 0;
+        function keepInView(node, force) {
+          var now = Date.now();
+          if (!force && now - lastScroll < 200) return;
+          lastScroll = now;
+          var r = node.getBoundingClientRect();
+          var limit = window.innerHeight - cta.offsetHeight - 24;
+          if (r.bottom > limit) {
+            window.scrollBy({ top: r.bottom - limit, behavior: reduceMotion ? "auto" : "smooth" });
+          }
+        }
+
+        function setProgress(n) { progress.textContent = n + " of 15 answers"; }
+
+        function typeItem(idx) {
+          if (finished) return;
+          if (idx >= answers.length) { finish(); return; }
+          current = idx;
+          var item = buildItem(answers[idx]);
+          item.body.classList.add("x-caret");
+          keepInView(item.wrap, true);
+          var t0 = null, shown = -1;
+          function step(ts) {
+            if (finished) return;
+            if (t0 === null) t0 = ts;
+            var n = Math.min(item.total, Math.floor((ts - t0) / CHAR_MS));
+            if (n !== shown) { renderTo(item, n); shown = n; keepInView(item.bubble); }
+            if (n < item.total) { raf = requestAnimationFrame(step); return; }
+            item.body.classList.remove("x-caret");
+            item.verdict.classList.remove("opacity-0");
+            setProgress(idx + 1);
+            keepInView(item.verdict, true);
+            timer = setTimeout(function () { typeItem(idx + 1); }, idx + 1 >= answers.length ? 400 : GAP_MS);
+          }
+          raf = requestAnimationFrame(step);
+        }
+
+        function start() {
+          if (started) return;
+          started = true;
+          startBtn.disabled = true;
+          startBtn.classList.add("opacity-60", "cursor-default");
+          startLabel.textContent = "Replaying…";
+          typeItem(0);
+        }
+
+        function renderAll() {
+          if (raf) cancelAnimationFrame(raf);
+          if (timer) clearTimeout(timer);
+          var existing = chat.children.length;
+          // Finish the one in progress, then add the rest.
+          if (existing) {
+            chat.removeChild(chat.lastElementChild);
+            existing -= 1;
+          }
+          for (var i = existing; i < answers.length; i++) renderFull(buildItem(answers[i]));
+          setProgress(answers.length);
+        }
+
+        function finish(skip) {
+          if (finished) return;
+          finished = true;
+          started = true;
+          if (skip) renderAll();
+          startBtn.disabled = true;
+          startBtn.classList.add("opacity-60", "cursor-default");
+          startLabel.textContent = "Replay complete";
+          skipBtn.classList.add("hidden");
+          showScore(skip);
+        }
+
+        var bars = [
+          ["CG&S Design-Build", 5],
+          ["THA Construction & Remodeling", 5],
+          ["Together Design & Build", 3],
+          ["Skelly Build", 2],
+          ["Catalyst Construction & General Contractors", 2],
+          ["ACE Remodeling TX", 2]
+        ];
+        var barWrap = document.getElementById("bars");
+        var fills = bars.map(function (b) {
+          var row = el("div");
+          var top = el("div", "flex items-baseline justify-between gap-3 text-sm");
+          top.appendChild(el("span", "text-gray-200", b[0]));
+          top.appendChild(el("span", "font-bold text-white tabular-nums", String(b[1])));
+          row.appendChild(top);
+          var track = el("div", "mt-2 h-6 rounded-full bg-gray-800 overflow-hidden");
+          track.setAttribute("role", "img");
+          track.setAttribute("aria-label", b[0] + ": " + b[1] + " of 15 answers");
+          var fill = el("div", "x-bar h-6 rounded-full bg-blue-500");
+          fill.style.width = "0%";
+          fill.dataset.w = (b[1] / 5) * 100 + "%";
+          track.appendChild(fill);
+          row.appendChild(track);
+          barWrap.appendChild(row);
+          return fill;
+        });
+
+        function showScore(scroll) {
+          reveal.classList.remove("opacity-0", "translate-y-10");
+          reveal.classList.add("opacity-100", "translate-y-0");
+          setTimeout(function () {
+            fills.forEach(function (f, i) {
+              setTimeout(function () { f.style.width = f.dataset.w; }, reduceMotion ? 0 : i * 120);
+            });
+          }, reduceMotion ? 0 : 350);
+          setTimeout(function () {
+            var top = reveal.getBoundingClientRect().top + window.scrollY - 16;
+            if (scroll || reveal.getBoundingClientRect().top > window.innerHeight * 0.4) {
+              window.scrollTo({ top: top, behavior: reduceMotion ? "auto" : "smooth" });
+            }
+          }, scroll ? 50 : 500);
+        }
+
+        startBtn.addEventListener("click", start);
+        skipBtn.addEventListener("click", function () { finish(true); });
+
+        if (reduceMotion) {
+          answers.forEach(function (a) { renderFull(buildItem(a)); });
+          setProgress(answers.length);
+          finished = true;
+          started = true;
+          startBtn.disabled = true;
+          startBtn.classList.add("opacity-60", "cursor-default");
+          startLabel.textContent = "Replay complete";
+          skipBtn.classList.add("hidden");
+          reveal.classList.remove("opacity-0", "translate-y-10");
+          reveal.classList.add("opacity-100", "translate-y-0");
+          fills.forEach(function (f) { f.style.width = f.dataset.w; });
+        } else if ("IntersectionObserver" in window) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) { io.disconnect(); setTimeout(start, 600); }
+            });
+          }, { threshold: 0.5 });
+          io.observe(startBtn);
+        }
+
+        // Booking sheet
+        var modal = document.getElementById("book-modal");
+        var sheet = document.getElementById("modal-sheet");
+        var backdrop = document.getElementById("modal-backdrop");
+        var openBtn = document.getElementById("open-modal");
+        var closeBtn = document.getElementById("close-modal");
+        var form = document.getElementById("book-form");
+        var err = document.getElementById("form-error");
+        var ok = document.getElementById("form-success");
+        var submitBtn = document.getElementById("submit-btn");
+        var lastFocus = null;
+
+        function openModal() {
+          lastFocus = document.activeElement;
+          modal.classList.remove("hidden");
+          document.body.style.overflow = "hidden";
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              backdrop.classList.remove("opacity-0");
+              sheet.classList.remove("translate-y-full");
+            });
+          });
+          setTimeout(function () {
+            var f = form.classList.contains("hidden") ? closeBtn : document.getElementById("f-name");
+            f.focus();
+          }, 50);
+        }
+        function closeModal() {
+          if (modal.classList.contains("hidden")) return;
+          backdrop.classList.add("opacity-0");
+          sheet.classList.add("translate-y-full");
+          document.body.style.overflow = "";
+          setTimeout(function () { modal.classList.add("hidden"); }, reduceMotion ? 0 : 300);
+          if (lastFocus) lastFocus.focus();
+        }
+        openBtn.addEventListener("click", openModal);
+        closeBtn.addEventListener("click", closeModal);
+        backdrop.addEventListener("click", closeModal);
+        document.addEventListener("keydown", function (e) {
+          if (modal.classList.contains("hidden")) return;
+          if (e.key === "Escape") { closeModal(); return; }
+          if (e.key === "Tab") {
+            var f = sheet.querySelectorAll("button:not([disabled]), input:not([type=hidden]), a[href]");
+            f = Array.prototype.filter.call(f, function (x) { return x.offsetParent !== null; });
+            if (!f.length) return;
+            var first = f[0], last = f[f.length - 1];
+            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+          }
+        });
+
+        var ERR_MSG = "Something went wrong. Email zane@firstlocal.io or call (512) 516-7733.";
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          err.classList.add("hidden");
+          if (!form.checkValidity()) {
+            err.textContent = "Please add your name and a valid email.";
+            err.classList.remove("hidden");
+            var bad = form.querySelector(":invalid");
+            if (bad) bad.focus();
+            return;
+          }
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Sending…";
+          fetch("https://formspree.io/f/xrpqzzon", {
+            method: "POST",
+            headers: { Accept: "application/json" },
+            body: new FormData(form)
+          })
+            .then(function (r) {
+              if (!r.ok) throw new Error("bad status");
+              form.classList.add("hidden");
+              ok.classList.remove("hidden");
+              closeBtn.focus();
+            })
+            .catch(function () {
+              err.textContent = ERR_MSG;
+              err.classList.remove("hidden");
+              submitBtn.disabled = false;
+              submitBtn.textContent = "Book my 15 minutes";
+            });
+        });
+      })();
+    </script>
+    <script data-goatcounter="https://firstlocal.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
